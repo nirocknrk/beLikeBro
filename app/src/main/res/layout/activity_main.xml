@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:fillViewport="true">
+
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.sathyabaman.belikebro.MainActivity">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView2"-->
+            <!--android:layout_width="384dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@mipmap/ic_launcher_round" />-->
+
+        <!--<com.google.android.gms.ads.AdView-->
+            <!--android:id="@+id/ad_mainpage"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="0dp"-->
+            <!--app:adSize="SMART_BANNER"-->
+            <!--android:visibility="invisible"-->
+            <!--app:adUnitId="ca-app-pub-7067806065281199/1645801620"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/imageView2" />-->
+
+        <Button
+            android:id="@+id/showMore1_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="OpenImageList"
+            android:text="Show More"
+            android:background="@drawable/full_round_white_outline"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+
+
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title1_textView"
+            android:layout_width="147dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="8dp"
+            android:text="Bro's new creations"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/showMore1_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/showMore1_button" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_new_items"
+            android:layout_width="0dp"
+            android:layout_height="235dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showMore1_button" />
+
+        <Button
+            android:id="@+id/showMore2_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Show More"
+
+            android:textStyle="bold"
+            android:onClick="OpenDecendingImageList"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/full_round_white_outline"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/RV_new_items" />
+
+
+        <TextView
+            android:id="@+id/title2_textView"
+            android:layout_width="147dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="8dp"
+            android:text="Recent Memories"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/showMore2_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/showMore2_button" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_recent_items"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showMore2_button" />
+
+        <Button
+            android:id="@+id/showMore3_button"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="show More"
+
+            android:textStyle="bold"
+            android:onClick="OpenLovedImageList"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:background="@drawable/full_round_white_outline"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+
+            app:layout_constraintTop_toBottomOf="@+id/RV_recent_items" />
+
+        <TextView
+            android:id="@+id/title3_textView"
+            android:layout_width="225dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="Most Loved by fans"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/showMore3_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/showMore3_button" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_most_loved"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showMore3_button" />
+
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/guideline"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_begin="16dp"-->
+            <!--tools:layout_editor_absoluteX="16dp"-->
+            <!--tools:layout_editor_absoluteY="81dp" />-->
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="202dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:text="Bro's ramdom pick for you"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/button2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button2" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Show More"
+            android:textStyle="bold"
+            android:onClick="OpenRandomImageList"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/full_round_white_outline"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/RV_most_loved" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_random_pick"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>
+

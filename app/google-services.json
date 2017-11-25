@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "525168221167",
+    "firebase_url": "https://be-like-bro-d8451.firebaseio.com",
+    "project_id": "be-like-bro-d8451",
+    "storage_bucket": "be-like-bro-d8451.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525168221167:android:2e9338efee917c0f",
+        "android_client_info": {
+          "package_name": "com.sathyabaman.belikebro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525168221167-7gsii7jffj6esncgvmhuoaqsvnug5l4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmnDXqJEft0Kjg9sg7X_MxXvzwvfH6g40"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

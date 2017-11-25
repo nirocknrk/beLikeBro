@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.sathyabaman.belikebro.Comman.RequestExternalResouce;
@@ -37,19 +38,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class ImageDetail extends AppCompatActivity {
 
     ImageView main_image;
     Context context;
     private AdView imageDetail_ad;
-
+    private InterstitialAd mInterstitialAd;
     private String location;
     private String date_time;
     private String views;
     private String hearts;
     private String downloads;
     private int id;
+    private int addShowCount;
     private Boolean isImageLiked = false;
     ImageButton button_heart;
     TextView tv_count_view;
@@ -59,8 +64,6 @@ public class ImageDetail extends AppCompatActivity {
     private int TotalImageCount;
     private int LastImageId;
     private int FirstImageId;
-
-
 
 
     @Override
@@ -74,31 +77,13 @@ public class ImageDetail extends AppCompatActivity {
         button_heart = (ImageButton)findViewById(R.id.likeButton);
         tv_count_view = (TextView) findViewById(R.id.viewsCount_textView);
         tv_count_downloads = (TextView) findViewById(R.id.downloadCount_textView);
+        main_image = (ImageView) findViewById(R.id.IV_main_Image);
+        imageDetail_ad = (AdView) findViewById(R.id.ad_image_detail);
 
         MobileAds.initialize(this, "ca-app-pub-7067806065281199~9864037146");
-        main_image = (ImageView) findViewById(R.id.IV_main_Image);
 
-        imageDetail_ad = (AdView) findViewById(R.id.ad_image_detail);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        imageDetail_ad.loadAd(adRequest);
-
-
-        imageDetail_ad.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() { }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) { }
-
-            @Override
-            public void onAdOpened() { }
-
-            @Override
-            public void onAdLeftApplication() { }
-
-            @Override
-            public void onAdClosed() { }
-        });
+        showAds();
+        show_interstitial_ads();
 
         id = Integer.parseInt(getIntent().getStringExtra("ID"));
         location = getIntent().getStringExtra("LOCATION");
@@ -107,19 +92,24 @@ public class ImageDetail extends AppCompatActivity {
         downloads = getIntent().getStringExtra("DOWNLOADS");
         hearts = getIntent().getStringExtra("HEART");
 
+
         tv_count_downloads.setText(downloads + " Downloads");
         tv_count_view.setText(views + " Views");
 
-        SharedPreferences sp = getSharedPreferences("Main_preferences", Activity.MODE_PRIVATE);
-        TotalImageCount = sp.getInt("total_count", 0);
-        FirstImageId = sp.getInt("first_Image_id", 0);
-        LastImageId = sp.getInt("last_Image_id", 0);
+        try {
+            SharedPreferences sp = getSharedPreferences("Main_preferences", Activity.MODE_PRIVATE);
+            TotalImageCount = sp.getInt("total_count", 0);
+            FirstImageId = sp.getInt("first_Image_id", 0);
+            LastImageId = sp.getInt("last_Image_id", 0);
 
-        updateCounts(id, "AddView");
 
-        Picasso.with(context)
-                .load(location)
-                .into(main_image);
+            updateCounts(id, "AddView");
+
+            Picasso.with(context)
+                    .load(location)
+                    .into(main_image);
+
+        } catch (Exception e){e.printStackTrace();}
     }
 
 
@@ -149,7 +139,9 @@ public class ImageDetail extends AppCompatActivity {
         } else {
             button_heart.setImageResource(R.drawable.white_like);
         }
+
     }
+
 
     public void shareImage(){
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
@@ -187,6 +179,7 @@ public class ImageDetail extends AppCompatActivity {
             //resume tasks needing this permission
         }
     }
+
 
 
     public void downloadTointernalStorage(String uRl){
@@ -275,7 +268,7 @@ public class ImageDetail extends AppCompatActivity {
     }
 
     public void goToNextImage(View v){
-
+            checktoshowBannerAd();
             if(new Utility().isNetworkAvailable(context)){
                 try {
 
@@ -336,6 +329,7 @@ public class ImageDetail extends AppCompatActivity {
     }
 
     public void goToPreviousImage(View v){
+        checktoshowBannerAd();
         if(new Utility().isNetworkAvailable(context)){
             try {
 
@@ -384,6 +378,76 @@ public class ImageDetail extends AppCompatActivity {
                     }
                 }).execute();
             }catch (Exception e){ e.printStackTrace();}
+        }
+    }
+    private void showAds(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        imageDetail_ad.loadAd(adRequest);
+
+
+        imageDetail_ad.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() { }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) { }
+
+            @Override
+            public void onAdOpened() { }
+
+            @Override
+            public void onAdLeftApplication() { }
+
+            @Override
+            public void onAdClosed() { }
+        });
+    }
+
+    private void show_interstitial_ads (){
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-7067806065281199/9108997283");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        // show the ad
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() { }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) { }
+
+            @Override
+            public void onAdOpened() { }
+
+            @Override
+            public void onAdLeftApplication() { }
+
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+
+    }
+
+    private void checktoshowBannerAd(){
+        SharedPreferences sp = getSharedPreferences("Main_preferences", Activity.MODE_PRIVATE);
+        addShowCount = sp.getInt("addShowCount", 0);
+        if (addShowCount >= 10){
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("addShowCount", 0);
+            mInterstitialAd.show();
+            editor.commit();
+        } else {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("addShowCount", addShowCount+1);
+            editor.commit();
         }
     }
 }

@@ -123,10 +123,6 @@ public class ImageDetail extends AppCompatActivity {
     }
 
 
-    public void download_image(View V){
-        isStoragePermissionGranted();
-    }
-
 
     public void zoom_Image(View V){
         Intent intent = new Intent(getBaseContext(), ImageExtraLarge.class);
@@ -155,16 +151,14 @@ public class ImageDetail extends AppCompatActivity {
         }
     }
 
-    public void shareImage(View v){
-
-        String message = location;
-        Intent share = new Intent(Intent.ACTION_SEND);
+    public void shareImage(){
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
         share.setType("text/plain");
-        share.putExtra(Intent.EXTRA_TEXT, message);
-        startActivity(Intent.createChooser(share, "Share Bro's Post"));
-
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        share.putExtra(Intent.EXTRA_SUBJECT, "Be Like Bro");
+        share.putExtra(Intent.EXTRA_TEXT, location);
+        startActivity(Intent.createChooser(share, "Share Bro's Creations"));
     }
-
 
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -271,6 +265,10 @@ public class ImageDetail extends AppCompatActivity {
 
             case R.id.action_download:
                 isStoragePermissionGranted();
+                return true;
+
+            case R.id.action_share:
+                shareImage();
                 return true;
         }
         return super.onOptionsItemSelected(item);
